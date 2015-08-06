@@ -1,0 +1,7 @@
+wysadzulicepl:
+    build: .
+    ports:
+     - "8000:8000"
+    volumes:
+     - .:/root/site
+    command: bash -c "ln -s ../../plantingjs/dist static && python manage.py runserver"
