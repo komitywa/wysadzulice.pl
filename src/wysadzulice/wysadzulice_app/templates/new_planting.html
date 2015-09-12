@@ -1,0 +1,45 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <meta name=description>
+        <meta name=viewport content="width=device-width, initial-scale=1, minimal-ui">
+        <title>plantingjs</title>
+        <link rel=stylesheet href="{% static "plantingjs/styles/main.css" %}">
+    </head>
+    <body>
+        <script type=text/javascript src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9fmhpMCKGM6BCMtsnn05GfxEK77jRHjc"></script>
+        <div id="viewport" class="viewport"></div>
+        <script type="text/javascript">
+            function simple_save_callback(planting) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/save',
+                    data: JSON.stringify(planting),
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: 'html',
+                    success: function(responseData, textStatus, jqXHR) {
+                        $(location).attr('href', JSON.parse(responseData)['url']);
+                    },
+                });
+
+            }
+        </script>
+        <script src="{% static "plantingjs/js/vendor.js" %}"></script>
+        <script src="{% static "plantingjs/js/planting.js" %}"></script>
+        <script type="text/javascript">
+            $(function() {
+                debugger;
+                PlantingInstance = new Planting( {
+                    container:document.querySelector('.viewport'),
+                    manifestoUrl: '{% static "manifesto.json" %}',
+                    googleApiKey: 'AIzaSyD9fmhpMCKGM6BCMtsnn05GfxEK77jRHjc',
+                    onSave: simple_save_callback
+                });
+            });
+        </script>
+    </body>
+</html>
