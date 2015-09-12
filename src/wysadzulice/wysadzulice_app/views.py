@@ -30,8 +30,12 @@ def show_campaign(request, id_):
     })
 
 
-def create_planting(request, id_):
+def new_planting(request, id_):
     return render(request, 'new_planting.html', context={'id_': id_})
+
+
+def create_planting(request, id_):
+    return '{}'
     c = models.Campaign.objects.get(id=id_)
     p = models.Planting(campaign=c)
     p.save()

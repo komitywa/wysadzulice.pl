@@ -14,10 +14,9 @@
         <div id="viewport" class="viewport"></div>
         <script type="text/javascript">
             function simple_save_callback(planting) {
-
                 $.ajax({
                     type: 'POST',
-                    url: '/save',
+                    url: '{% url "create_planting" id_ %}',
                     data: JSON.stringify(planting),
                     contentType: 'application/json;charset=UTF-8',
                     dataType: 'html',
@@ -32,7 +31,6 @@
         <script src="{% static "plantingjs/js/planting.js" %}"></script>
         <script type="text/javascript">
             $(function() {
-                debugger;
                 PlantingInstance = new Planting( {
                     container:document.querySelector('.viewport'),
                     manifestoUrl: '{% static "manifesto.json" %}',
