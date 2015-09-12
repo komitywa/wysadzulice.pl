@@ -1,0 +1,10 @@
+That's a view for camapaign with id {{ id_ }}.
+
+<table>
+    <tr><th>id</th></tr>
+    {% for p in plantings %}
+    <tr><td>{{ p.id }}</td></tr>
+    {% endfor %}
+</table>
+
+<a href="create_planting/{{ id_ }}">Create new planting!</a>
