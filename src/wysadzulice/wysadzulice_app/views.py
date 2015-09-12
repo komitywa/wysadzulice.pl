@@ -22,4 +22,16 @@ def create_campaign(request):
 
 
 def show_campaign(request, id_):
-    return HttpResponse(u"That's a view for camapaign with id %s." % id_)
+    c = models.Campaign.objects.filter(id=id_)
+    p = models.Planting.objects.filter(campaign=c)
+    return render(request, 'show_campaign.html', context={
+        'id_': id_,
+        'plantings': p,
+    })
+
+
+def create_planting(request, id_):
+    c = models.Campaign.objects.get(id=id_)
+    p = models.Planting(campaign=c)
+    p.save()
+    return redirect('show_campaign', id_=id_)
