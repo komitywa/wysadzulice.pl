@@ -1,3 +1,4 @@
 *.pyc
 
 src/wysadzulice/db.sqlite3
+src/wysadzulice/wysadzulice_app/static/plantingjs
