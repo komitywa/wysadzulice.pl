@@ -27,11 +27,6 @@ def update():
     ):
         run('git pull')
         run('git checkout master')
-
-    with contextlib.nested(
-        cd('/var/www/wysadzulice_pl/src/wysadzulice'),
-        prefix('workon wysadzulice_pl')
-    ):
         run('python manage.py migrate --traceback')
 
     run('service apache2 restart')
