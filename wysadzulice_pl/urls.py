@@ -1,4 +1,4 @@
-"""wysadzulice URL Configuration
+"""wysadzulice_pl URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -16,5 +16,5 @@ Including another URLconf
 from django.conf.urls import include, url
 
 urlpatterns = [
-    url(r'^', include('wysadzulice_app.urls')),
+    url(r'^', include('wysadzulice.urls')),
 ]

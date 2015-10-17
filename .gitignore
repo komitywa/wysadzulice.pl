@@ -1,4 +1,5 @@
 *.pyc
 
-src/wysadzulice/db.sqlite3
-src/wysadzulice/wysadzulice_app/static/plantingjs
+.coverage
+db.sqlite3
+wysadzulice/static/plantingjs
