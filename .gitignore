@@ -1,4 +1,4 @@
 *.pyc
 
 db.sqlite3
-wysadzulice_app/static/plantingjs
+wysadzulice/static/plantingjs

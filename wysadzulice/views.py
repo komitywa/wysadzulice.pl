@@ -66,4 +66,7 @@ def create_planting(request, id_):
             projection=obj.get('projection', 0),
         )
         o.save()
-    return HttpResponse(u'{"url": "%s"}' % reverse('show_campaign', kwargs=dict(id_=id_)))
+    return HttpResponse(u'{"url": "%s"}' % reverse(
+        'show_campaign',
+        kwargs=dict(id_=id_)
+    ))

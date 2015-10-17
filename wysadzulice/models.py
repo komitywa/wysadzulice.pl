@@ -18,6 +18,7 @@ class Planting(models.Model):
     pitch = models.FloatField()
     manifesto = models.CharField(max_length=200)
 
+
 class PlantedObject(models.Model):
     planting = models.ForeignKey(Planting)
     object_id = models.IntegerField()

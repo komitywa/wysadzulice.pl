@@ -38,12 +38,12 @@ class Migration(migrations.Migration):
                 ('heading', models.FloatField()),
                 ('pitch', models.FloatField()),
                 ('manifesto', models.CharField(max_length=200)),
-                ('campaign', models.ForeignKey(to='wysadzulice_app.Campaign')),
+                ('campaign', models.ForeignKey(to='wysadzulice.Campaign')),
             ],
         ),
         migrations.AddField(
             model_name='plantedobject',
             name='planting',
-            field=models.ForeignKey(to='wysadzulice_app.Planting'),
+            field=models.ForeignKey(to='wysadzulice.Planting'),
         ),
     ]
