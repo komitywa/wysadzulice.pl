@@ -1,0 +1,4 @@
+django
+pep8
+coverage
+codecov
