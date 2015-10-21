@@ -12,6 +12,7 @@
     <body>
         <script type=text/javascript src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9fmhpMCKGM6BCMtsnn05GfxEK77jRHjc"></script>
         <div id="viewport" class="viewport"></div>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script type="text/javascript">
             function simple_save_callback(planting) {
                 $.ajax({
@@ -27,8 +28,7 @@
 
             }
         </script>
-        <script src="{% static "plantingjs/js/vendor.js" %}"></script>
-        <script src="{% static "plantingjs/js/planting.js" %}"></script>
+        <script src="{% static "plantingjs/js/main.js" %}"></script>
         <script type="text/javascript">
             $(function() {
                 PlantingInstance = new Planting( {
