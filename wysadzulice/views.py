@@ -11,7 +11,7 @@ from . import models
 
 
 def index(request):
-    return HttpResponse(u"Welcome on wysadzulice.pl")
+    return redirect('new_campaign')
 
 
 def new_campaign(request):
@@ -40,7 +40,7 @@ def new_planting(request, id_):
 @csrf_exempt
 def create_planting(request, id_):
     c = models.Campaign.objects.get(id=id_)
-    planting = json.loads(request.body)
+    planting = json.loads(request.body.decode("utf-8"))
     objects = planting['objects']
 
     p = models.Planting(
@@ -55,7 +55,7 @@ def create_planting(request, id_):
 
     p.save()
 
-    for obj in objects.itervalues():
+    for obj in objects.values():
         o = models.PlantedObject(
             planting=p,
             object_id=obj.get('object_id', 0),
