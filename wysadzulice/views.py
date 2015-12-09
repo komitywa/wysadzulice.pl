@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import View
+
 from . import models
 
 
@@ -18,10 +20,17 @@ def new_campaign(request):
     return render(request, 'new_campaign.html')
 
 
-def create_campaign(request):
-    c = models.Campaign()
-    c.save()
-    return redirect('show_campaign', id_=str(c.id))
+class CreateCampaign(View):
+
+    @staticmethod
+    def post(request):
+        c = models.Campaign()
+        c.save()
+        return redirect('show_campaign', id_=str(c.id))
+
+    @staticmethod
+    def get(request):
+        return render(request, 'create_campaign.html')
 
 
 def show_campaign(request, id_):
