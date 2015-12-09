@@ -8,3 +8,11 @@ WYSADZULICE.PL
 ## Synopsis
 
 Django-based application that run http://wysadzulice.pl
+
+
+## How to install
+* Install Python requirements
+* Install Node requirements
+* Create db
+* gulp build
+* content of dist directory from plantingjs copy to wysadzulice/static/plantingjs
