@@ -7,10 +7,10 @@
         <meta name=description>
         <meta name=viewport content="width=device-width, initial-scale=1, minimal-ui">
         <title>plantingjs</title>
-        <link rel=stylesheet href="{% static "plantingjs/styles/main.css" %}">
+        <link rel=stylesheet href="{% static "styles/vendor.css" %}">
+        <link rel=stylesheet href="{% static "styles/main.css" %}">
     </head>
     <body>
-        <script type=text/javascript src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9fmhpMCKGM6BCMtsnn05GfxEK77jRHjc"></script>
         <div id="viewport" class="viewport"></div>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script type="text/javascript">
@@ -28,7 +28,7 @@
 
             }
         </script>
-        <script src="{% static "plantingjs/js/main.js" %}"></script>
+        <script src="{% static "js/main.js" %}"></script>
         <script type="text/javascript">
             $(function() {
                 PlantingInstance = new Planting( {
