@@ -7,8 +7,8 @@
         <meta name=description>
         <meta name=viewport content="width=device-width, initial-scale=1, minimal-ui">
         <title>plantingjs</title>
-        <link rel=stylesheet href="{% static "styles/vendor.css" %}">
-        <link rel=stylesheet href="{% static "styles/main.css" %}">
+        <link rel=stylesheet href="{% static "wysadzulice/styles/vendor.css" %}">
+        <link rel=stylesheet href="{% static "wysadzulice/styles/main.css" %}">
     </head>
     <body>
         <div id="viewport" class="viewport"></div>
@@ -28,12 +28,12 @@
 
             }
         </script>
-        <script src="{% static "js/main.js" %}"></script>
+        <script src="{% static "wysadzulice/js/main.js" %}"></script>
         <script type="text/javascript">
             $(function() {
                 PlantingInstance = new Planting( {
                     container:document.querySelector('.viewport'),
-                    manifestoUrl: '{% static "manifesto.json" %}',
+                    manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
                     googleApiKey: 'AIzaSyD9fmhpMCKGM6BCMtsnn05GfxEK77jRHjc',
                     onSave: simple_save_callback
                 });

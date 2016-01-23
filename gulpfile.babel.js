@@ -4,6 +4,8 @@ import browserify from 'browserify';
 import concat from 'gulp-concat';
 import del from 'del';
 import domain from 'domain';
+import flatten from 'gulp-flatten';
+import filter from 'gulp-filter';
 import gulp from 'gulp';
 import gutil from 'gulp-util';
 import hbsfy from 'hbsfy';
@@ -55,7 +57,7 @@ gulp.task('js', function() {
         }).bundle();
       });
     }))
-    .pipe(gulp.dest('./wysadzulice/static/js/'));
+    .pipe(gulp.dest('./wysadzulice/static/wysadzulice/js/'));
 });
 /* End of building JS */
 
@@ -65,7 +67,7 @@ gulp.task('css:main', function() {
     .pipe(sass())
     .pipe(autoprefixer({browsers: ['last 1 version']}))
     .pipe(concat('main.css'))
-    .pipe(gulp.dest('./wysadzulice/static/styles/'));
+    .pipe(gulp.dest('./wysadzulice/static/wysadzulice/styles/'));
 });
 
 gulp.task('css:vendor', function() {
@@ -76,13 +78,38 @@ gulp.task('css:vendor', function() {
   ])
     .pipe(sass())
     .pipe(concat('vendor.css'))
-    .pipe(gulp.dest('./wysadzulice/static/styles/'));
+    .pipe(gulp.dest('./wysadzulice/static/wysadzulice/styles/'));
 });
 
 gulp.task('css', ['css:vendor', 'css:main']);
 /* End of building CSS */
 
 
+/* Building fonts */
+gulp.task('fonts', function() {
+  return gulp.src('./node_modules/plantingjs/src/fonts/**/*')
+    .pipe(filter('**/*.{eot,svg,ttf,woff}'))
+    .pipe(flatten())
+    .pipe(gulp.dest('./wysadzulice/static/wysadzulice/fonts'));
+});
+/* End of building fonts */
+
+
+/* Building assets */
+gulp.task('assets:main', function() {
+  return gulp.src('./wysadzulice/assets/assets/**/*')
+    .pipe(gulp.dest('./wysadzulice/static/wysadzulice/assets/main'));
+});
+
+gulp.task('assets:vendor', function() {
+  return gulp.src('./wysadzulice/assets/assets/**/*')
+    .pipe(gulp.dest('./wysadzulice/static/wysadzulice/assets/vendor'));
+});
+
+gulp.task('assets', ['assets:main', 'assets:vendor']);
+/* End of building assets */
+
+
 /* Building all frontend assets */
-gulp.task('build', ['css', 'js']);
+gulp.task('build', ['assets', 'css', 'fonts', 'js']);
 /* End of building all frontend assets */
