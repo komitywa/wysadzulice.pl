@@ -8,3 +8,11 @@ WYSADZULICE.PL
 ## Synopsis
 
 Django-based application that run http://wysadzulice.pl
+
+
+## How to install
+* Install Python requirements
+* Install Node requirements
+* Create db
+* gulp build
+* Run server

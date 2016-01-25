@@ -2,4 +2,5 @@
 
 .coverage
 db.sqlite3
-wysadzulice/static/plantingjs
+node_modules
+wysadzulice/static
