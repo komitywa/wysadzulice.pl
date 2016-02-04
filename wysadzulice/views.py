@@ -12,11 +12,15 @@ from . import models
 
 
 def index(request):
-    return redirect('new_campaign')
+    return render(request, 'index.html')
 
 
 def new_campaign(request):
     return render(request, 'new_campaign.html')
+
+
+def list_campaigns(request):
+    return render(request, 'index.html')
 
 
 def create_campaign(request):
