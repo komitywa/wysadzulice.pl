@@ -15,12 +15,6 @@ class Campaign(models.Model):
 
 class Planting(models.Model):
     campaign = models.ForeignKey(Campaign)
-    lat = models.FloatField()
-    lng = models.FloatField()
-    zoom = models.FloatField()
-    heading = models.FloatField()
-    pitch = models.FloatField()
-    manifesto = models.CharField(max_length=200)
 
 
 class PlantedObject(models.Model):
@@ -28,6 +22,3 @@ class PlantedObject(models.Model):
     object_id = models.IntegerField()
     x = models.FloatField()
     y = models.FloatField()
-    scale = models.FloatField()
-    layer = models.IntegerField()
-    projection = models.IntegerField()
