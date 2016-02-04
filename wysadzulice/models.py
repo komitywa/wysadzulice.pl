@@ -6,7 +6,11 @@ from django.db import models
 
 
 class Campaign(models.Model):
-    pass
+    lat = models.FloatField()
+    lng = models.FloatField()
+    zoom = models.FloatField()
+    heading = models.FloatField()
+    pitch = models.FloatField()
 
 
 class Planting(models.Model):

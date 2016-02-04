@@ -8,7 +8,9 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from . import models
+from .models import Campaign
+from .models import PlantedObject
+from .models import Planting
 
 
 def index(request):
@@ -20,18 +22,21 @@ def new_campaign(request):
 
 
 def list_campaigns(request):
-    return render(request, 'index.html')
+    campaigns = Campaign.objects.all()
+    return render(request, 'list_campaigns.html', context={
+        'campaigns': campaigns,
+    })
 
 
 def create_campaign(request):
-    c = models.Campaign()
+    c = Campaign()
     c.save()
     return redirect('show_campaign', id_=str(c.id))
 
 
 def show_campaign(request, id_):
-    c = models.Campaign.objects.filter(id=id_)
-    p = models.Planting.objects.filter(campaign=c)
+    c = Campaign.objects.filter(id=id_)
+    p = Planting.objects.filter(campaign=c)
     return render(request, 'show_campaign.html', context={
         'id_': id_,
         'plantings': p,
@@ -44,11 +49,11 @@ def new_planting(request, id_):
 
 @csrf_exempt
 def create_planting(request, id_):
-    c = models.Campaign.objects.get(id=id_)
+    c = Campaign.objects.get(id=id_)
     planting = json.loads(request.body.decode("utf-8"))
     objects = planting['objects']
 
-    p = models.Planting(
+    p = Planting(
         campaign=c,
         lat=planting.get('lat', 0),
         lng=planting.get('lng', 0),
@@ -61,7 +66,7 @@ def create_planting(request, id_):
     p.save()
 
     for obj in objects.values():
-        o = models.PlantedObject(
+        o = PlantedObject(
             planting=p,
             object_id=obj.get('object_id', 0),
             x=obj.get('x', 0),
