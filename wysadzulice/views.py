@@ -17,7 +17,15 @@ def index(request):
     return render(request, 'index.html')
 
 
+@csrf_exempt
 def new_campaign(request):
+    if request.method == 'POST' and request.is_ajax:
+        campaign_data = json.loads(request.body.decode('utf-8'))
+        campaign = Campaign(**campaign_data)
+        campaign.save()
+        return HttpResponse('{"url": "%s"}' % reverse(
+            'show_campaign',
+            kwargs={'id_': str(campaign.id)}))
     return render(request, 'new_campaign.html')
 
 
@@ -26,12 +34,6 @@ def list_campaigns(request):
     return render(request, 'list_campaigns.html', context={
         'campaigns': campaigns,
     })
-
-
-def create_campaign(request):
-    c = Campaign()
-    c.save()
-    return redirect('show_campaign', id_=str(c.id))
 
 
 def show_campaign(request, id_):

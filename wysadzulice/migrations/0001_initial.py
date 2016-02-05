@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
@@ -13,31 +13,27 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Campaign',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='PlantedObject',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('object_id', models.IntegerField()),
-                ('x', models.FloatField()),
-                ('y', models.FloatField()),
-                ('scale', models.FloatField()),
-                ('layer', models.IntegerField()),
-                ('projection', models.IntegerField()),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Planting',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
                 ('lat', models.FloatField()),
                 ('lng', models.FloatField()),
                 ('zoom', models.FloatField()),
                 ('heading', models.FloatField()),
                 ('pitch', models.FloatField()),
-                ('manifesto', models.CharField(max_length=200)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='PlantedObject',
+            fields=[
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('object_id', models.IntegerField()),
+                ('x', models.FloatField()),
+                ('y', models.FloatField()),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Planting',
+            fields=[
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
                 ('campaign', models.ForeignKey(to='wysadzulice.Campaign')),
             ],
         ),
