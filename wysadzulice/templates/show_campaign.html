@@ -1,10 +1,6 @@
-That's a view for camapaign with id {{ id_ }}.
+Campaign nr {{ campaign.pk }}.<br/>
 
-<table>
-    <tr><th>id</th></tr>
-    {% for p in plantings %}
-    <tr><td>{{ p.id }}</td></tr>
-    {% endfor %}
-</table>
-
-<a href="new_planting/{{ id_ }}">Create new planting!</a>
+<ul>
+  <li><a href="{% url 'new_planting' campaign.pk %}">New planting</a></li>
+  <li><a href="{% url 'list_plantings' campaign.pk %}">List plantings</a></li>
+</ul>

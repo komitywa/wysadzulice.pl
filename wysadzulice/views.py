@@ -4,7 +4,6 @@ import json
 
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
@@ -37,48 +36,42 @@ def list_campaigns(request):
 
 
 def show_campaign(request, id_):
-    c = Campaign.objects.filter(id=id_)
-    p = Planting.objects.filter(campaign=c)
+    campaign = Campaign.objects.get(id=id_)
     return render(request, 'show_campaign.html', context={
-        'id_': id_,
-        'plantings': p,
+        'campaign': campaign,
     })
 
 
-def new_planting(request, id_):
-    return render(request, 'new_planting.html', context={'id_': id_})
-
-
 @csrf_exempt
-def create_planting(request, id_):
-    c = Campaign.objects.get(id=id_)
-    planting = json.loads(request.body.decode("utf-8"))
-    objects = planting['objects']
+def new_planting(request, id_):
+    campaign = Campaign.objects.get(id=id_)
+    if request.method == 'POST' and request.is_ajax:
+        planting = Planting(campaign=campaign)
+        planting.save()
+        planting_data = json.loads(request.body.decode('utf-8'))
+        objects = planting_data['objects']
+        for o in objects.values():
+            PlantedObject(
+                planting=planting, object_id=o['objectId'], x=o['x'], y=o['y']
+            ).save()
+        return HttpResponse('{"url": "%s"}' % reverse(
+            'show_planting',
+            kwargs={'campaign_id': id_, 'planting_id': planting.id}))
+    return render(request, 'new_planting.html', context={
+        'campaign': campaign,
+    })
 
-    p = Planting(
-        campaign=c,
-        lat=planting.get('lat', 0),
-        lng=planting.get('lng', 0),
-        zoom=planting.get('zoom', 1),
-        heading=planting.get('heading', 0) or 0,
-        pitch=planting.get('pitch', 0),
-        manifesto=planting.get('manifesto', ''),
-    )
 
-    p.save()
+def list_plantings(request, id_):
+    return render(request, 'index.html')
 
-    for obj in objects.values():
-        o = PlantedObject(
-            planting=p,
-            object_id=obj.get('object_id', 0),
-            x=obj.get('x', 0),
-            y=obj.get('y', 0),
-            scale=obj.get('scale', 1),
-            layer=obj.get('layer', 1),
-            projection=obj.get('projection', 0),
-        )
-        o.save()
-    return HttpResponse(u'{"url": "%s"}' % reverse(
-        'show_campaign',
-        kwargs=dict(id_=id_)
-    ))
+
+def show_planting(request, campaign_id, planting_id):
+    campaign = Campaign.objects.get(id=campaign_id)
+    planting = Planting.objects.get(id=planting_id)
+    planted_objects = PlantedObject.objects.filter(planting=planting)
+    return render(request, 'show_planting.html', context={
+        'campaign': campaign,
+        'planting': planting,
+        'planted_objects': planted_objects,
+    })
