@@ -52,8 +52,8 @@ def new_planting(request, id_):
         objects = planting_data['objects']
         for o in objects.values():
             PlantedObject(
-                planting=planting, object_id=o['objectId'], x=o['x'], y=o['y']
-            ).save()
+                planting=planting, object_id=o['objectId'], x=o['x'], y=o['y'],
+                width=o['scale']).save()
         return HttpResponse('{"url": "%s"}' % reverse(
             'show_planting',
             kwargs={'campaign_id': id_, 'planting_id': planting.id}))
