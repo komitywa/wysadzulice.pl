@@ -12,16 +12,22 @@ urlpatterns = [
     url(
         r'^campaigns/(?P<id_>[0-9]+)$',
         views.show_campaign,
-        name='show_campaign'
+        name='show_campaign',
     ),
     url(
-        r'^campaigns/new_planting/(?P<id_>[0-9]+)$',
+        r'^campaigns/(?P<id_>[0-9]+)/plantings/new$',
         views.new_planting,
-        name='new_planting'
+        name='new_planting',
     ),
     url(
-        r'^campaigns/create_planting/(?P<id_>[0-9]+)$',
-        views.create_planting,
-        name='create_planting'
+        r'^campaigns/(?P<id_>[0-9]+)/plantings/list$',
+        views.list_plantings,
+        name='list_plantings',
+    ),
+    url(
+        r'^campaigns/(?P<campaign_id>[0-9]+)'
+        r'/plantings/(?P<planting_id>[0-9]+)$',
+        views.show_planting,
+        name='show_planting',
     ),
 ]

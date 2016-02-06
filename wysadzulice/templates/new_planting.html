@@ -1,43 +1,48 @@
 {% load staticfiles %}
-
 <!doctype html>
 <html>
-    <head>
-        <meta charset=utf-8>
-        <meta name=description>
-        <meta name=viewport content="width=device-width, initial-scale=1, minimal-ui">
-        <title>plantingjs</title>
-        <link rel=stylesheet href="{% static "wysadzulice/styles/vendor.css" %}">
-        <link rel=stylesheet href="{% static "wysadzulice/styles/main.css" %}">
-    </head>
-    <body>
-        <div id="viewport" class="viewport"></div>
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript">
-            function simple_save_callback(planting) {
-                $.ajax({
-                    type: 'POST',
-                    url: '{% url "create_planting" id_ %}',
-                    data: JSON.stringify(planting),
-                    contentType: 'application/json;charset=UTF-8',
-                    dataType: 'html',
-                    success: function(responseData, textStatus, jqXHR) {
-                        $(location).attr('href', JSON.parse(responseData)['url']);
-                    },
-                });
-
-            }
-        </script>
-        <script src="{% static "wysadzulice/js/main.js" %}"></script>
-        <script type="text/javascript">
-            $(function() {
-                PlantingInstance = new Planting( {
-                    container:document.querySelector('.viewport'),
-                    manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
-                    googleApiKey: 'AIzaSyD9fmhpMCKGM6BCMtsnn05GfxEK77jRHjc',
-                    onSave: simple_save_callback
-                });
-            });
-        </script>
-    </body>
+  <head>
+    <meta charset=utf-8>
+    <meta name=description>
+    <meta name=viewport content="width=device-width, initial-scale=1, minimal-ui">
+    <title>plantingjs</title>
+    <link rel=stylesheet href="{% static "wysadzulice/styles/vendor.css" %}">
+    <link rel=stylesheet href="{% static "wysadzulice/styles/main.css" %}">
+  </head>
+  <body>
+    <div id="viewport" class="viewport"></div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+      function simple_save_callback(planting) {
+        $.ajax({
+          type: 'POST',
+          url: '{% url "new_planting" campaign.pk %}',
+          data: JSON.stringify(planting),
+          contentType: 'application/json;charset=UTF-8',
+          dataType: 'html',
+          success: function(responseData, textStatus, jqXHR) {
+            $(location).attr('href', JSON.parse(responseData)['url']);
+          },
+        });
+      }
+    </script>
+    <script src="{% static "wysadzulice/js/main.js" %}"></script>
+    <script type="text/javascript">
+      $(function() {
+          PlantingInstance = new Planting( {
+              container: document.querySelector('.viewport'),
+              manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
+              googleApiKey: 'AIzaSyD9fmhpMCKGM6BCMtsnn05GfxEK77jRHjc',
+              onSave: simple_save_callback
+          });
+          PlantingInstance.initStreetview({
+            lat: {{ campaign.lat }},
+            lng: {{ campaign.lng }},
+            heading: {{ campaign.heading}},
+            pitch: {{ campaign.pitch}},
+            zoom: {{ campaign.zoom}}
+          });
+      });
+    </script>
+  </body>
 </html>
