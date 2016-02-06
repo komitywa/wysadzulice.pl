@@ -22,3 +22,4 @@ class PlantedObject(models.Model):
     object_id = models.IntegerField()
     x = models.FloatField()
     y = models.FloatField()
+    width = models.FloatField()

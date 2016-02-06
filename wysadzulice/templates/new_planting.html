@@ -33,14 +33,14 @@
               container: document.querySelector('.viewport'),
               manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
               googleApiKey: 'AIzaSyD9fmhpMCKGM6BCMtsnn05GfxEK77jRHjc',
-              onSave: simple_save_callback
+              onSave: simple_save_callback,
           });
           PlantingInstance.initStreetview({
             lat: {{ campaign.lat }},
             lng: {{ campaign.lng }},
             heading: {{ campaign.heading}},
             pitch: {{ campaign.pitch}},
-            zoom: {{ campaign.zoom}}
+            zoom: {{ campaign.zoom}},
           });
       });
     </script>

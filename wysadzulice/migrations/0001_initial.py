@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Campaign',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('lat', models.FloatField()),
                 ('lng', models.FloatField()),
                 ('zoom', models.FloatField()),
@@ -24,16 +24,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PlantedObject',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('object_id', models.IntegerField()),
                 ('x', models.FloatField()),
                 ('y', models.FloatField()),
+                ('width', models.FloatField()),
             ],
         ),
         migrations.CreateModel(
             name='Planting',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('campaign', models.ForeignKey(to='wysadzulice.Campaign')),
             ],
         ),

@@ -1,1 +1,47 @@
-Campaign nr {{ campaign.pk }}, planting nr {{ planting.pk }} contains {{ planted_objects.count }} objects.<br/>
+{% load staticfiles %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <meta name=description>
+    <meta name=viewport content="width=device-width, initial-scale=1, minimal-ui">
+    <title>plantingjs</title>
+    <link rel=stylesheet href="{% static "wysadzulice/styles/vendor.css" %}">
+    <link rel=stylesheet href="{% static "wysadzulice/styles/main.css" %}">
+  </head>
+  <body>
+    <div id="viewport" class="viewport"></div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="{% static "wysadzulice/js/main.js" %}"></script>
+    <script type="text/javascript">
+      $(function() {
+          PlantingInstance = new Planting( {
+              container: document.querySelector('.viewport'),
+              manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
+              googleApiKey: 'AIzaSyD9fmhpMCKGM6BCMtsnn05GfxEK77jRHjc',
+          });
+          PlantingInstance.initViewer({
+            lat: {{ campaign.lat }},
+            lng: {{ campaign.lng }},
+            heading: {{ campaign.heading}},
+            pitch: {{ campaign.pitch}},
+            zoom: {{ campaign.zoom}},
+            manifesto: '{% static "wysadzulice/assets/main/manifesto.json" %}',
+            objects: [
+              {% for o in planted_objects %}
+                {
+                  position: {
+                    x: {{ o.x }},
+                    y: {{ o.y }},
+                  },
+                  object: {{ o.object_id }},
+                  projection: 0,
+                  width: {{ o.width }},
+                },
+              {% endfor %}
+            ],
+          });
+      });
+    </script>
+  </body>
+</html>
