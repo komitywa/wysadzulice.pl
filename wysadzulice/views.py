@@ -63,7 +63,12 @@ def new_planting(request, id_):
 
 
 def list_plantings(request, id_):
-    return render(request, 'index.html')
+    campaign = Campaign.objects.get(id=id_)
+    plantings = Planting.objects.filter(campaign=campaign)
+    return render(request, 'list_plantings.html', context={
+        'campaign': campaign,
+        'plantings': plantings,
+    })
 
 
 def show_planting(request, campaign_id, planting_id):
