@@ -2,5 +2,15 @@ Campaign nr {{ campaign.pk }}.<br/>
 
 <ul>
   <li><a href="{% url 'new_planting' campaign.pk %}">New planting</a></li>
-  <li><a href="{% url 'list_plantings' campaign.pk %}">List plantings</a></li>
 </ul>
+
+{% if plantings %}
+  Plantings:
+  <ul>
+    {% for p in plantings %}
+      <li><a href="{% url 'show_planting' campaign.pk p.pk %}">{{ p.pk }}</a></li>
+    {% endfor %}
+  </ul>
+{% else %}
+  There are no plantings yet.
+{% endif %}

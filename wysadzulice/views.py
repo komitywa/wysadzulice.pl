@@ -37,8 +37,10 @@ def list_campaigns(request):
 
 def show_campaign(request, id_):
     campaign = Campaign.objects.get(id=id_)
+    plantings = Planting.objects.filter(campaign=campaign)
     return render(request, 'show_campaign.html', context={
         'campaign': campaign,
+        'plantings': plantings,
     })
 
 
@@ -59,15 +61,6 @@ def new_planting(request, id_):
             kwargs={'campaign_id': id_, 'planting_id': planting.id}))
     return render(request, 'new_planting.html', context={
         'campaign': campaign,
-    })
-
-
-def list_plantings(request, id_):
-    campaign = Campaign.objects.get(id=id_)
-    plantings = Planting.objects.filter(campaign=campaign)
-    return render(request, 'list_plantings.html', context={
-        'campaign': campaign,
-        'plantings': plantings,
     })
 
 
