@@ -13,7 +13,10 @@ from .models import Planting
 
 
 def index(request):
-    return render(request, 'index.html')
+    campaigns = Campaign.objects.all()
+    return render(request, 'index.html', context={
+        'campaigns': campaigns,
+    })
 
 
 @csrf_exempt
@@ -26,13 +29,6 @@ def new_campaign(request):
             'show_campaign',
             kwargs={'id_': str(campaign.id)}))
     return render(request, 'new_campaign.html')
-
-
-def list_campaigns(request):
-    campaigns = Campaign.objects.all()
-    return render(request, 'list_campaigns.html', context={
-        'campaigns': campaigns,
-    })
 
 
 def show_campaign(request, id_):
