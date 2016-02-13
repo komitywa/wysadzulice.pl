@@ -28,5 +28,9 @@ def update():
         run('git pull')
         run('git checkout master')
         run('python manage.py migrate --traceback')
+        run('npm cache clear')
+        run('rm -rf ./node_modules')
+        run('npm install')
+        run('gulp build')
 
     run('service apache2 restart')
