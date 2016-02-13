@@ -1,4 +1,14 @@
 <ul>
   <li><a href="{% url 'new_campaign' %}">New campaign</a></li>
-  <li><a href="{% url 'list_campaigns' %}">List campaigns</a></li>
 </ul>
+
+{% if campaigns %}
+  Campaigns:
+  <ul>
+    {% for c in campaigns %}
+      <li><a href="{% url 'show_campaign' c.pk %}">{{ c.pk }}</a></li>
+    {% endfor %}
+  </ul>
+{% else %}
+  There are no campaigns yet.
+{% endif %}
