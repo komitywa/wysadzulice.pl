@@ -8,7 +8,6 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^campaigns/new$', views.new_campaign, name='new_campaign'),
-    url(r'^campaigns/list$', views.list_campaigns, name='list_campaigns'),
     url(
         r'^campaigns/(?P<id_>[0-9]+)$',
         views.show_campaign,
