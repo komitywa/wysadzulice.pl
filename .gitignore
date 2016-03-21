@@ -3,4 +3,5 @@
 .coverage
 db.sqlite3
 node_modules
+wysadzulice_pl/secrets.py
 wysadzulice/static
