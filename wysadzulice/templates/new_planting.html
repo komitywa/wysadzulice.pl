@@ -32,7 +32,7 @@
           PlantingInstance = new Planting( {
               container: document.querySelector('.viewport'),
               manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
-              googleApiKey: 'AIzaSyD9fmhpMCKGM6BCMtsnn05GfxEK77jRHjc',
+              googleApiKey: '{{ google_maps_key }}',
               onSave: simple_save_callback,
           });
           PlantingInstance.initStreetview({

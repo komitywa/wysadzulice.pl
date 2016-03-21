@@ -2,6 +2,7 @@
 
 import json
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -28,7 +29,9 @@ def new_campaign(request):
         return HttpResponse('{"url": "%s"}' % reverse(
             'show_campaign',
             kwargs={'id_': str(campaign.id)}))
-    return render(request, 'new_campaign.html')
+    return render(request, 'new_campaign.html', context={
+        'google_maps_key': settings.GOOGLE_MAPS_KEY,
+    })
 
 
 def show_campaign(request, id_):
@@ -56,6 +59,7 @@ def new_planting(request, id_):
             'show_planting',
             kwargs={'campaign_id': id_, 'planting_id': planting.id}))
     return render(request, 'new_planting.html', context={
+        'google_maps_key': settings.GOOGLE_MAPS_KEY,
         'campaign': campaign,
     })
 
@@ -65,6 +69,7 @@ def show_planting(request, campaign_id, planting_id):
     planting = Planting.objects.get(id=planting_id)
     planted_objects = PlantedObject.objects.filter(planting=planting)
     return render(request, 'show_planting.html', context={
+        'google_maps_key': settings.GOOGLE_MAPS_KEY,
         'campaign': campaign,
         'planting': planting,
         'planted_objects': planted_objects,
