@@ -11,15 +11,12 @@
   </head>
   <body>
     <div id="viewport" class="viewport"></div>
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="{% static "wysadzulice/js/main.js" %}"></script>
     <script type="text/javascript">
-      $(function() {
-        PlantingInstance = new WysadzUlice.NewCampaignView( {
-          manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
-          googleApiKey: '{{ google_maps_key }}',
-          saveUrl: '{% url "new_campaign" %}',
-        });
+      new WysadzUlice.NewCampaignView( {
+        manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
+        googleApiKey: '{{ google_maps_key }}',
+        saveUrl: '{% url "new_campaign" %}',
       });
     </script>
   </body>
