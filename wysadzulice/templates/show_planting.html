@@ -11,36 +11,29 @@
   </head>
   <body>
     <div id="viewport" class="viewport"></div>
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="{% static "wysadzulice/js/main.js" %}"></script>
     <script type="text/javascript">
-      $(function() {
-          PlantingInstance = new WysadzUlice.Planting( {
-              container: document.querySelector('.viewport'),
-              manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
-              googleApiKey: '{{ google_maps_key }}',
-          });
-          PlantingInstance.initViewer({
-            lat: {{ campaign.lat }},
-            lng: {{ campaign.lng }},
-            heading: {{ campaign.heading}},
-            pitch: {{ campaign.pitch}},
-            zoom: {{ campaign.zoom}},
-            manifesto: '{% static "wysadzulice/assets/main/manifesto.json" %}',
-            objects: [
-              {% for o in planted_objects %}
-                {
-                  position: {
-                    x: {{ o.x }},
-                    y: {{ o.y }},
-                  },
-                  object: {{ o.object_id }},
-                  projection: 0,
-                  scale: {{ o.scale }},
-                },
-              {% endfor %}
-            ],
-          });
+      new WysadzUlice.ShowPlantingView( {
+        manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
+        googleApiKey: '{{ google_maps_key }}',
+        lat: {{ campaign.lat }},
+        lng: {{ campaign.lng }},
+        heading: {{ campaign.heading}},
+        pitch: {{ campaign.pitch}},
+        zoom: {{ campaign.zoom}},
+        objects: [
+          {% for o in planted_objects %}
+            {
+              position: {
+                x: {{ o.x }},
+                y: {{ o.y }},
+              },
+              object: {{ o.object_id }},
+              projection: 0,
+              scale: {{ o.scale }},
+            },
+          {% endfor %}
+        ],
       });
     </script>
   </body>
