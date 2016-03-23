@@ -1,3 +1,4 @@
 import Planting from 'plantingjs';
+import NewCampaignView from './js/new_campaign';
 
-export default Planting;
+export { NewCampaignView, Planting };

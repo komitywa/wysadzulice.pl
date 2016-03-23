@@ -29,7 +29,7 @@
     <script src="{% static "wysadzulice/js/main.js" %}"></script>
     <script type="text/javascript">
       $(function() {
-          PlantingInstance = new Planting( {
+          PlantingInstance = new WysadzUlice.Planting( {
               container: document.querySelector('.viewport'),
               manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
               googleApiKey: '{{ google_maps_key }}',
