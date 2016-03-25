@@ -6,7 +6,7 @@ import { View } from 'backbone';
 export default View.extend({
 
   initialize: function(options) {
-    this.$el = jquery('.viewport');
+    this.setElement(jquery('.viewport'));
     this.saveUrl = options.saveUrl;
     this.engine = new Planting({
       container: this.$el,
