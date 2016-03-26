@@ -20,10 +20,15 @@ const NewCampaignMapsView = View.extend({
 });
 
 
+const CatalogModel = Model.extend({
+  url: '/static/wysadzulice/assets/main/catalog.json',
+});
+
+
 const ItemView = View.extend({
 
   initialize: function(options) {
-    this.$el.html('<img src="' + options.image + '"></img>');
+    this.$el.html(`<img src="${options.image}"></img>`);
   },
 
 });
@@ -31,29 +36,26 @@ const ItemView = View.extend({
 const NewCampaignItemsView = View.extend({
 
   events: {
-    'click .btn': 'save_campaign',
+    'click .btn': 'saveCampaign',
   },
 
   initialize: function(options) {
     this.parent = options.parent;
-    this.$el.html('<div class="btn"">Zapisz</div>');
-    jquery.ajax({
-      type: 'GET',
-      url: '/static/wysadzulice/assets/main/catalog.json',
-      contentType: 'application/json;charset=UTF-8',
-      dataType: 'html',
-      success: this.success.bind(this),
-    });
+    this.model = new CatalogModel();
+    this.model
+      .fetch()
+      .then(this.render.bind(this));
   },
 
-  success: function(responseData) {
-    for (const item of JSON.parse(responseData).reverse()) {
+  render: function(data) {
+    for (const item of data) {
       const itemView = new ItemView(item);
-      this.$el.prepend(itemView.render().el);
+      this.$el.append(itemView.render().el);
     }
+    this.$el.append('<div class="btn"">Zapisz</div>');
   },
 
-  save_campaign: function() {
+  saveCampaign: function() {
     jquery.ajax({
       type: 'POST',
       url: this.parent.saveUrl,
