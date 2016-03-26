@@ -11,32 +11,12 @@
   </head>
   <body>
     <div id="viewport" class="viewport"></div>
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript">
-      function on_select_piano(campaign) {
-        $.ajax({
-          type: 'POST',
-          url: '{% url "new_campaign" %}',
-          data: JSON.stringify(campaign),
-          contentType: 'application/json;charset=UTF-8',
-          dataType: 'html',
-          success: function(responseData, textStatus, jqXHR) {
-            debugger;
-            $(location).attr('href', JSON.parse(responseData)['url']);
-          },
-        });
-      }
-    </script>
     <script src="{% static "wysadzulice/js/main.js" %}"></script>
     <script type="text/javascript">
-      $(function() {
-        PlantingInstance = new Planting( {
-          container: document.querySelector('.viewport'),
-          manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
-          googleApiKey: '{{ google_maps_key }}',
-          selectPanoMode: true,
-          onSelectPano: on_select_piano,
-        });
+      new WysadzUlice.NewCampaignView( {
+        manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
+        googleApiKey: '{{ google_maps_key }}',
+        saveUrl: '{% url "new_campaign" %}',
       });
     </script>
   </body>

@@ -11,37 +11,17 @@
   </head>
   <body>
     <div id="viewport" class="viewport"></div>
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript">
-      function simple_save_callback(planting) {
-        $.ajax({
-          type: 'POST',
-          url: '{% url "new_planting" campaign.pk %}',
-          data: JSON.stringify(planting),
-          contentType: 'application/json;charset=UTF-8',
-          dataType: 'html',
-          success: function(responseData, textStatus, jqXHR) {
-            $(location).attr('href', JSON.parse(responseData)['url']);
-          },
-        });
-      }
-    </script>
     <script src="{% static "wysadzulice/js/main.js" %}"></script>
     <script type="text/javascript">
-      $(function() {
-          PlantingInstance = new Planting( {
-              container: document.querySelector('.viewport'),
-              manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
-              googleApiKey: '{{ google_maps_key }}',
-              onSave: simple_save_callback,
-          });
-          PlantingInstance.initStreetview({
-            lat: {{ campaign.lat }},
-            lng: {{ campaign.lng }},
-            heading: {{ campaign.heading}},
-            pitch: {{ campaign.pitch}},
-            zoom: {{ campaign.zoom}},
-          });
+      new WysadzUlice.NewPlantingView( {
+        manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
+        googleApiKey: '{{ google_maps_key }}',
+        saveUrl: '{% url "new_planting" campaign.pk %}',
+        lat: {{ campaign.lat }},
+        lng: {{ campaign.lng }},
+        heading: {{ campaign.heading}},
+        pitch: {{ campaign.pitch}},
+        zoom: {{ campaign.zoom}},
       });
     </script>
   </body>

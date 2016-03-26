@@ -42,7 +42,7 @@ gulp.task('js', function() {
         file.contents = browserify({
           entries: [file.path],
           debug: false,
-          standalone: 'Planting',
+          standalone: 'WysadzUlice',
           paths: ['./node_modules/', './wysadzulice/assets/'],
           transform: [
             [hbsfy, {

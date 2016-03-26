@@ -1,0 +1,112 @@
+[
+  {
+    "id": "buszcze",
+    "image": "/static/wysadzulice/assets/main/objects/bluszcze.png"
+  },
+  {
+   "id": "bujaczek",
+   "image": "/static/wysadzulice/assets/main/objects/bujaczek.png"
+  },
+  {
+    "id": "dostepnosc",
+    "image": "/static/wysadzulice/assets/main/objects/dostepnosc.png"
+  },
+  {
+    "id": "drzewo",
+    "image": "/static/wysadzulice/assets/main/objects/drzewo.png"
+  },
+  { "id": "fontanna",
+    "image": "/static/wysadzulice/assets/main/objects/fontanna.png"
+  },
+  { "id": "foodtrack",
+    "image": "/static/wysadzulice/assets/main/objects/foodtrack.png"
+  },
+  {
+    "id": "kosz_na_smieci",
+    "image": "/static/wysadzulice/assets/main/objects/kosz_na_smieci.png"
+  },
+  {
+    "id": "krzak",
+    "image": "/static/wysadzulice/assets/main/objects/krzak.png"
+  },
+  {
+    "id": "kwietnik",
+    "image": "/static/wysadzulice/assets/main/objects/kwietnik.png"
+  },
+  {
+    "id": "kwitnace",
+    "image": "/static/wysadzulice/assets/main/objects/kwitnace.png"
+  },
+  {
+    "id": "lawka",
+    "image": "/static/wysadzulice/assets/main/objects/lawka.png"
+  },
+  {
+    "id": "parking",
+    "image": "/static/wysadzulice/assets/main/objects/parking.png"
+  },
+  {
+    "id": "piesek_smietnik",
+    "image": "/static/wysadzulice/assets/main/objects/piesek_smietnik.png"
+  },
+  {
+    "id": "policjant",
+    "image": "/static/wysadzulice/assets/main/objects/policjant.png"
+  },
+  {
+    "id": "przejscie",
+    "image": "/static/wysadzulice/assets/main/objects/przejscie.png"
+  },
+  {
+    "id": "pudelko",
+    "image": "/static/wysadzulice/assets/main/objects/pudelko.png"
+  },
+  {
+    "id": "rower",
+    "image": "/static/wysadzulice/assets/main/objects/rower.png"
+  },
+  {
+    "id": "rower_naprawa",
+    "image": "/static/wysadzulice/assets/main/objects/rower_naprawa.png"
+  },
+  {
+    "id": "rower_stojak_a",
+    "image": "/static/wysadzulice/assets/main/objects/rower_stojak_a.png"
+  },
+  {
+    "id": "rower_stojak_b",
+    "image": "/static/wysadzulice/assets/main/objects/rower_stojak_b.png"
+  },
+  {
+    "id": "rzezba",
+    "image": "/static/wysadzulice/assets/main/objects/rzezba.png"
+  },
+  {
+    "id": "segregacja",
+    "image": "/static/wysadzulice/assets/main/objects/segregacja.png"
+  },
+  {
+    "id": "slup_ogloszeniowy",
+    "image": "/static/wysadzulice/assets/main/objects/slup_ogloszeniowy.png"
+  },
+  {
+    "id": "swiatla",
+    "image": "/static/wysadzulice/assets/main/objects/swiatla.png"
+  },
+  {
+    "id": "swiatla_czb",
+    "image": "/static/wysadzulice/assets/main/objects/swiatla_czb.png"
+  },
+  {
+    "id": "trawa",
+    "image": "/static/wysadzulice/assets/main/objects/trawa.png"
+  },
+  {
+    "id": "znaki",
+    "image": "/static/wysadzulice/assets/main/objects/znaki.png"
+  },
+  {
+    "id": "kwadrat",
+    "image": "/static/wysadzulice/assets/main/objects/00.png"
+   }
+]
