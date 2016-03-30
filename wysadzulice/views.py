@@ -5,12 +5,21 @@ import json
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Campaign
+from .models import Mail
 from .models import PlantedObject
 from .models import Planting
+
+
+def mailing(request):
+    if request.method == 'POST':
+        Mail(email=request.POST['email']).save()
+        return redirect('mailing')
+    return render(request, 'mailing.html')
 
 
 def index(request):
