@@ -1,0 +1,14 @@
+<p>
+  Nasze narzędzie jest na razie prototypem. Zostaw nam maila, damy ci znać, gdy będziesz mógł przetestować apkę lub wysadzić swoje miasto.
+</p>
+<p>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <p><input type="text" name="email"></input></p>
+    <p><input type="submit" value="Zapisz"></p>
+  </form>
+</p>
+</form>
+<p>
+  <a href="{% url "index" %}">Przejdź do prototypu.</a>
+</p>

@@ -6,7 +6,8 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.mailing, name='mailing'),
+    url(r'^campaigns$', views.index, name='index'),
     url(r'^campaigns/new$', views.new_campaign, name='new_campaign'),
     url(
         r'^campaigns/(?P<id_>[0-9]+)$',
