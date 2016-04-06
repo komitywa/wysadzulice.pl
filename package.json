@@ -1,20 +1,23 @@
 {
   "dependencies": {
-    "babelify": "^6.4.0",
-    "browserify": "^11.2.0",
-    "plantingjs": "git://github.com/komitywa/plantingjs",
     "babel-core": "^5.8.29",
-    "gulp": "^3.9.0",
-    "gulp-util": "^3.0.6",
-    "hbsfy": "^2.4.1",
-    "handlebars": "^4.0.4",
-    "gulp-plumber": "^1.0.1",
-    "gulp-tap": "^0.1.3",
-    "gulp-autoprefixer": "^1.0.1",
-    "gulp-sass": "^2.0.4",
-    "jquery-ui": "^1.10.5",
+    "babelify": "^6.4.0",
+    "backbone": "^1.3.3",
+    "browserify": "^11.2.0",
     "del": "^0.1.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^1.0.1",
+    "gulp-concat": "^2.6.0",
     "gulp-filter": "^1.0.2",
-    "gulp-flatten": "^0.0.4"
+    "gulp-flatten": "^0.0.4",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.0.4",
+    "gulp-tap": "^0.1.3",
+    "gulp-util": "^3.0.6",
+    "handlebars": "^4.0.4",
+    "hbsfy": "^2.4.1",
+    "jquery": "^2.2.3",
+    "jquery-ui": "^1.10.5",
+    "plantingjs": "git://github.com/komitywa/plantingjs"
   }
 }
