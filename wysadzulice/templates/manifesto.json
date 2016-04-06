@@ -1,0 +1,10 @@
+{
+  "lat": 52.3965155,
+  "lng": 16.8978846,
+  "zoom": 14,
+  "toolboxobjects": [
+    {% for i in items %}
+      { "projections": [ "{{ i.image }}" ] }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}

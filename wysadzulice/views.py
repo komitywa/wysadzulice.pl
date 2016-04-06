@@ -9,10 +9,11 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Campaign
-from .models import Mail
-from .models import PlantedObject
-from .models import Planting
+from wysadzulice.models import Campaign
+from wysadzulice.models import CatalogItem
+from wysadzulice.models import Mail
+from wysadzulice.models import PlantedObject
+from wysadzulice.models import Planting
 
 
 def mailing(request):
@@ -33,8 +34,11 @@ def index(request):
 def new_campaign(request):
     if request.method == 'POST' and request.is_ajax:
         campaign_data = json.loads(request.body.decode('utf-8'))
+        items = campaign_data.pop('checked')
         campaign = Campaign(**campaign_data)
         campaign.save()
+        campaign.items.add(*CatalogItem.objects.filter(
+            catalog_id__in=items))
         return HttpResponse('{"url": "%s"}' % reverse(
             'show_campaign',
             kwargs={'id_': str(campaign.id)}))
@@ -83,3 +87,13 @@ def show_planting(request, campaign_id, planting_id):
         'planting': planting,
         'planted_objects': planted_objects,
     })
+
+
+def catalog(request):
+    items = CatalogItem.objects.order_by('id')
+    return render(request, 'catalog.json', context={'items': items})
+
+
+def manifesto(request, id_):
+    items = Campaign.objects.get(id=id_).items.order_by('id')
+    return render(request, 'manifesto.json', context={'items': items})

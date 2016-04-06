@@ -14,7 +14,7 @@
     <script src="{% static "wysadzulice/js/main.js" %}"></script>
     <script type="text/javascript">
       new WysadzUlice.NewPlantingView( {
-        manifestoUrl: '{% static "wysadzulice/assets/main/manifesto.json" %}',
+        manifestoUrl: '{% url "manifesto" campaign.pk %}',
         googleApiKey: '{{ google_maps_key }}',
         saveUrl: '{% url "new_planting" campaign.pk %}',
         lat: {{ campaign.lat }},

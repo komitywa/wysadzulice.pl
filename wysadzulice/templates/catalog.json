@@ -1,0 +1,8 @@
+[
+  {% for i in items %}
+    {
+      "id": "{{ i.catalog_id }}",
+      "image": "{{ i.image }}"
+    }{% if not forloop.last %},{% endif %}
+  {% endfor %}
+]

@@ -13,7 +13,7 @@ const NewCampaignMapsView = View.extend({
       googleApiKey: options.googleApiKey,
       saveUrl: this.parent.saveUrl,
       selectPanoMode: true,
-      onSelectPano: this.parent.on_select_pano.bind(this.parent),
+      onSelectPano: this.parent.onSelectPano.bind(this.parent),
     });
   },
 
@@ -21,14 +21,32 @@ const NewCampaignMapsView = View.extend({
 
 
 const CatalogModel = Model.extend({
-  url: '/static/wysadzulice/assets/main/catalog.json',
+  defaults: {
+    checked: new Set(),
+  },
+  url: '/api/catalog',
 });
 
 
 const ItemView = View.extend({
 
+  events: {
+    'click [type="checkbox"]': 'clicked',
+  },
+
   initialize: function(options) {
-    this.$el.html(`<img src="${options.image}"></img>`);
+    this.model = new Model(options);
+    this.parent = options.parent;
+    this.$el.html(`<div><img src="${options.image}"></img>
+                   <input type="checkbox" value="${options.id}" /></div>`);
+  },
+
+  clicked: function(event) {
+    if (event.toElement.checked) {
+      this.parent.model.get('checked').add(this.model.id);
+    } else {
+      this.parent.model.get('checked').delete(this.model.id);
+    }
   },
 
 });
@@ -49,23 +67,31 @@ const NewCampaignItemsView = View.extend({
 
   render: function(data) {
     for (const item of data) {
-      const itemView = new ItemView(item);
+      const itemView = new ItemView({
+        parent: this,
+        ...item,
+      });
       this.$el.append(itemView.render().el);
     }
     this.$el.append('<div class="btn"">Zapisz</div>');
   },
 
   saveCampaign: function() {
-    jquery.ajax({
-      type: 'POST',
-      url: this.parent.saveUrl,
-      data: JSON.stringify(this.parent.model),
-      contentType: 'application/json;charset=UTF-8',
-      dataType: 'html',
-      success: function(responseData) {
-        jquery(location).attr('href', JSON.parse(responseData).url);
-      },
-    });
+    if (this.model.get('checked').size !== 0) {
+      this.parent.model.set({
+        'checked': Array.from(this.model.get('checked')),
+      });
+      jquery.ajax({
+        type: 'POST',
+        url: this.parent.saveUrl,
+        data: JSON.stringify(this.parent.model),
+        contentType: 'application/json;charset=UTF-8',
+        dataType: 'html',
+        success: function(responseData) {
+          jquery(location).attr('href', JSON.parse(responseData).url);
+        },
+      });
+    }
   },
 
 });
@@ -85,7 +111,7 @@ export default View.extend({
     });
   },
 
-  on_select_pano: function(campaign) {
+  onSelectPano: function(campaign) {
     this.model.set(campaign);
     this.panoView.remove();
     this.$el.html('<div id="viewport-items" style="height: 100%"></div>');

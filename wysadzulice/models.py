@@ -10,12 +10,21 @@ class Mail(models.Model):
         return self.email
 
 
+class CatalogItem(models.Model):
+    image = models.CharField(max_length=250)
+    catalog_id = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.catalog_id
+
+
 class Campaign(models.Model):
     lat = models.FloatField()
     lng = models.FloatField()
     zoom = models.FloatField()
     heading = models.FloatField()
     pitch = models.FloatField()
+    items = models.ManyToManyField(CatalogItem)
 
 
 class Planting(models.Model):

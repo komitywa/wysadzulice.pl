@@ -25,4 +25,6 @@ urlpatterns = [
         views.show_planting,
         name='show_planting',
     ),
+    url(r'api/catalog$', views.catalog, name='catalog'),
+    url(r'api/manifesto/(?P<id_>[0-9]+)$', views.manifesto, name='manifesto'),
 ]
